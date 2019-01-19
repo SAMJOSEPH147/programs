@@ -1,0 +1,15 @@
+#from array import *
+r = int(input())
+c = int(input())
+list = []
+array = []
+for i in range(r):
+    for j in range(c):
+        a = int(input())
+        list.append(a)
+    array.insert(i,list)
+    list = []
+for i in range(r):
+    for j in range(c):
+        print(array[i][j],end=" ")
+    print()
