@@ -1,0 +1,32 @@
+n = int(input())
+rect1 = []
+rect2 = []
+for i in range(n):
+    a = input()
+    b = input()
+    str1 = a.split()
+    str2 = b.split()
+    for i in str1:
+        i = int(i)
+        rect1.append(i)
+    for i in str2:
+        i = int(i)
+        rect2.append(i)
+    l1x = rect1[0]
+    l1y = rect1[1]
+    r1x = rect1[2]
+    r1y = rect1[3]
+    l2x = rect2[0]
+    l2y = rect2[1]
+    r2x = rect2[2]
+    r2y = rect2[3]
+    if l1x>r2x or l2x>r1x:
+        print(0)
+        break
+    elif r1y>l2y or r2y>l1y:
+        print(0)
+        break
+    else:
+        print(1)
+    rect1 = []
+    rect2 = []
