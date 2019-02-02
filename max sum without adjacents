@@ -1,0 +1,24 @@
+n = int(input())
+int_list = []
+max_list = []
+for i in range(n):
+    a = int(input())
+    str = input()
+    str_list = str.split()
+    for i in str_list:
+        i = int(i)
+        int_list.append(i)
+    while len(int_list) > 0:
+        big = max(int_list)
+        max_list.append(big)
+        ind = int_list.index(big)
+        if ind != 0:
+            int_list.remove(int_list[ind-1])
+            ind -= 1
+        if ind != len(int_list)-1:
+            int_list.remove(int_list[ind+1])
+            ind -= 1
+        int_list.remove(big)
+    print(sum(max_list))
+    int_list = []
+    max_list = []
