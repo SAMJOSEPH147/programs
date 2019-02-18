@@ -1,0 +1,18 @@
+def bubbleSort(lits):
+    count = 0
+    q = len(lits)
+    for i in range(q):
+        for j in range(q-i-1):
+            if lits[j]>lits[j+1]:
+                lits[j],lits[j+1]=lits[j+1],lits[j]
+        count += 1
+        print("Iteration",count)
+        print(*lits)
+n = int(input())
+sort = []
+for k in range(n):
+    a = int(input())
+    sort.append(a)
+bubbleSort(sort)
+print("Sorted List")
+print(*sort)
