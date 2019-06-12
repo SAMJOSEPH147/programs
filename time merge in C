@@ -1,0 +1,39 @@
+On one fine Sunday, Sita and Radha decided to solve puzzles. Sita asked Radha to solve her puzzle. Sita gave the puzzle on time. 
+She gave Radha the number of hours, number of minutes and number of seconds as input. 
+With the given input, Radha should find out the total number of hours, the total number of minutes and the total number of seconds.
+Help Radha by writing a program for this.
+
+For example, the input given by Sita is 1, 70, 5. Now, 70 minutes is equal to 1 hour 10 minutes. So the output will be
+
+Total number of hour(s) is 2
+Total number of minutes is 10
+Total number of seconds is 5
+
+
+
+
+
+#include<stdio.h>
+int main()
+{
+    int nh,nm,ns,h,m,s,nmh=0,nsm=0;
+    scanf("%d %d %d",&nh,&nm,&ns);
+    if(ns>=60)
+    {
+        nsm=ns/60;
+        ns=ns%60;
+    }
+    nm = nm+nsm;
+    if(nm>=60)
+    {
+        nmh=nm/60;
+        nm=nm%60;
+    }
+    s=ns;
+    m=nm;
+    h=nh+nmh;
+    printf("Total number of hours is %d",h);
+    printf("\nTotal number of minutes is %d",m);
+    printf("\nTotal number of seconds is %d",s);
+    return 0;
+}
