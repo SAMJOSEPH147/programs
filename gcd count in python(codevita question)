@@ -1,0 +1,34 @@
+0 < n < 10^9
+if n = 10,
+find hcf(1,10),hcf(2,10) till hcf(10,10)
+return the count of hcf=1
+
+
+def gcd(a,b):
+    if a>b:
+        t = a
+        a = b
+        b = t
+    for i in range(1,a+1):
+        if(a%i==0 and b%i==0):
+            g=i
+    if(g==1):
+        return True
+    else:
+        return False
+n = int(input())
+count = 0
+for i in range(1,n):
+    if(gcd(i,n)):
+        count=count+1
+print(count)
+
+
+
+OTHER LOGIC:
+count = n
+l = [2,3,5,7,11,13]
+for i in l:
+  if(n%i==0):
+    count = count - (count/i)
+print count
