@@ -1,0 +1,22 @@
+#TO FIND IF THE NUMBERS IN THE RANGE ARE NEON NUMBERS OR NOT
+
+
+def isNeonNumber(n):
+    sq_num = n*n
+    copy = n
+    sum = 0
+    while(sq_num>0):
+        rem = sq_num%10
+        sum = sum+rem
+        sq_num = sq_num//10
+    if(sum == copy):
+        return True
+    else:
+        return False
+l = int(input("Enter the lower limit"))
+u = int(input("Enter the upper limit"))
+for i in range(l,u+1):
+    if(isNeonNumber(i)):
+        print(str(i)+" IS A NEON NUMBER")
+    else:
+        print(str(i)+" is not a Neon number")
