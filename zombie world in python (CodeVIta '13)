@@ -1,0 +1,12 @@
+#ZOMBIE WORLD - CODEVITA 2012
+
+line1 = list(map(int,input().split(" ")))
+line2 = list(map(int,input().split(" ")))
+b = line1[0]
+n = line1[1]
+for i in line2:
+    b = b - ((i%2)+(i//2))
+if b<0:
+    print("NO")
+else:
+    print("YES")
