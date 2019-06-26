@@ -1,0 +1,17 @@
+#ACCICO EQUI PAIRS 
+
+l = list(map(int,input().split(" ")))
+left = 0
+right = len(l)-1
+k = 1
+while(k):
+    if(l[left]>l[right]):
+        right -= 1
+        l[right] = l[right] + l[right+1]
+    elif(l[right]>l[left]):
+        left += 1
+        l[left] = l[left] + l[left-1]
+    elif(l[left]==l[right]):
+        if l[left] == sum(l[left+2:right-1]):
+            k = 0
+print(left+1,right-1)
