@@ -1,0 +1,25 @@
+"""
+String Rotation problem asked in codevita 18 and also in mockvita 19
+"""
+
+str = input()
+copy = str
+x = ""
+n = int(input())
+while(n):
+    d,m = input().split(" ")
+    m = int(m)
+    if(d == 'L'):
+        str = str[m:]+str[0:m]
+        x = x+str[0]
+        n = n-1
+        #print(str)
+    elif(d == 'R'):
+        str = str[len(str)-1]+str[0:len(str)-1]
+        x = x+str[0]
+        n = n-1
+        #print(str)
+if(x in copy):
+    print("YES")
+else:
+    print("NO")
