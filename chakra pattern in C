@@ -1,0 +1,41 @@
+//CHAKRA PATTERN IN C
+
+#include<stdio.h>
+int main()
+{
+int size;
+scanf("%d",&size);
+int board[size][size];
+int i,j;
+int left,top,n,count;
+left = 0;
+top = size-1;
+n = 1;
+for(i=0;i<size;i++,left++,top--)
+{
+for(j=left;j<=top;j++,n++)
+{
+board[left][j]=n;
+}
+for(j=left+1;j<=top;j++,n++)
+{
+board[j][top]=n;
+}
+for(j=top-1;j>=left;j--,n++)
+{
+board[top][j]=n;
+}
+for(j=top-1;j>=left+1;j--,n++)
+{
+board[j][left]=n;
+}
+}
+for(i=0;i<size;i++)
+{
+for(j=0;j<size;j++)
+{
+printf("%-5d",board[i][j]);
+}
+printf("\n");
+}
+}
