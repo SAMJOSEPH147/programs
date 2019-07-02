@@ -1,0 +1,20 @@
+#SOCK MERCHANT - HackerRank Problem (Solution in Python)
+
+
+l = int(input())
+socks = list(map(int,input().split()))
+socks.sort()
+pairs = 0
+while(l>0):
+    for i in socks:
+        if(socks.count(i)>=2):
+            socks.remove(i)
+            socks.remove(i)
+            pairs += 1
+            l -= 2
+            break
+        else:
+            socks.remove(i)
+            l -= 1
+            break
+print(pairs)
