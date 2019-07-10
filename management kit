@@ -1,0 +1,3016 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<process.h>
+#include<dos.h>
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<ctype.h>
+#include<windows.h>
+#include<time.h>
+//#include<bios.h>                   //contains  show_mouse();
+
+#define RETURNTIME 15
+
+#define ANS 15
+#define ACS 4
+ COORD coord={0,0};
+char catagories[][15]={"Computer","Electronics","Electrical","Civil","Mechnnical","Architecture"};
+void returnfunc(void);
+void mainmenu(void);
+void addbooks(void);
+void deletebooks(void);
+void editbooks(void);
+void searchbooks(void);
+void issuebooks(void);
+void viewbooks(void);
+void closeapplication(void);
+int  getdata();
+int  checkid(int);
+int t(void);
+//void show_mouse(void);
+void Password();
+void issuerecord();
+void loaderanim();
+ // sets coordinates to 0,0
+//COORD max_buffer_size = GetLargestConsoleWindowSize(hOut);
+COORD max_res,cursor_size;
+  int password();
+
+ void addrecord();
+
+ void viewrecord();
+
+ void editrecord();
+
+void editpassword();
+
+void deleterecord();
+
+struct record
+
+{
+
+    char time[6];
+
+    char name[30];
+
+    char place[25];
+
+    char duration[10];
+
+    char note[500];
+
+} ;
+FILE *fp,*ft,*fs;
+
+//list of global variable
+int s;
+char findbook;
+char passwor[10]={"pokhara"};
+
+
+struct meroDate
+{
+    int mm,dd,yy;
+};
+struct books
+{
+    int id;
+    char stname[20];
+    char name[20];
+    char Author[20];
+    int quantity;
+    float Price;
+    int count;
+    int rackno;
+    char *cat;
+    struct meroDate issued;
+    struct meroDate duedate;
+};
+struct books a;
+
+
+int main()
+{
+    printf("\n 50.DIARY MANAGEMENT");
+    printf("\n 60.CONTACTS MANAGEMENT");
+    printf("\n 70.DEPT STORE MANAGEMENT");
+    printf("\n 80.LIBRARY STORE MANAGEMENT");
+
+    int z;
+     int cha;
+printf("\n__________ENTER YOUR CHOICE____________  ");
+    scanf("\n%d",&z);
+    switch(z)
+    {
+
+    case 50:
+    {
+
+         printf("\n\n\t***********************************\n");
+
+    printf("\t*PASSWORD PROTECTED PERSONAL DIARY*\n");
+
+    printf("\t***********************************");
+
+
+   while(1)
+
+
+        {
+
+                printf("\n\n\t\tMAIN MENU:");
+
+                printf("\n\n\tADD RECORD\t[1]");
+
+                printf("\n\tVIEW RECORD\t[2]");
+
+                printf("\n\tEDIT RECORD\t[3]");
+
+                printf("\n\tDELETE RECORD\t[4]");
+
+                printf("\n\tEDIT PASSWORD\t[5]");
+
+                printf("\n\tEXIT\t\t[6]");
+
+                printf("\n\n\tENTER YOUR CHOICE:");
+
+                scanf("%d",&cha);
+
+
+            switch(cha)
+
+                    {
+
+                            case 1:
+
+                            addrecord();
+
+                            break;
+
+
+                            case 2:
+
+                            viewrecord();
+
+                            break;
+
+
+                            case 3:
+
+                            editrecord();
+
+                            break;
+
+
+                            case 4:
+
+                            deleterecord();
+
+                            break;
+
+
+                            case 5:
+
+                            editpassword();
+
+                            break;
+
+
+                            case 6:
+
+                            printf("\n\n\t\tTHANK YOU FOR USING THE SOFTWARE BY:\n\n\tBIJAY PURI\n\n\tBHANU POUDEL\n\n\tNRIPASH AYER...");
+
+                            getch();
+
+                            exit(0);
+
+
+                            default:
+
+                            printf("\nYOU ENTERED WRONG CHOICE..");
+
+                            printf("\nPRESS ANY KEY TO TRY AGAIN");
+
+                            getch();
+
+                            break;
+
+                    }
+
+                system("cls");
+
+
+        }
+
+    case 60:
+    {
+        struct contact
+{
+long ph;
+char name[20],add[20],email[30];
+}list;
+
+char query[20],name[20];
+FILE *fp, *ft;
+int i,n,ch,l,found;
+
+        main:
+system("cls");    /* ************Main menu ***********************  */
+printf("\n\t **** Welcome to a0 contact Manager ****");
+printf("\n\n\n\t\t\tMAIN MENU\n\t\t=====================\n\t\t[1] Add a new Contact\n\t\t[2] List all Contacts\n\t\t[3] Search for contact\n\t\t[4] Edita Contact\n\t\t[5] Delete a Contact\n\t\t[0] Exit\n\t\t=================\n\t\t");
+printf("Enter the choice:");
+scanf("%d",&cha);
+
+switch(cha)
+{
+case 0:
+printf("\n\n\t\tAre you sure u want to exit?");
+break;
+/* *********************add new contacts************  */
+case 1:
+
+system("cls");
+fp=fopen("contact.dll","a");
+for (;;)
+{ fflush(stdin);
+printf("To exit enter blank space in the name input\nName (Use identical):");
+scanf("%[^\n]",&list.name);
+if(stricmp(list.name,"")==0 || stricmp(list.name," ")==0)
+break;
+fflush(stdin);
+printf("Phone:");
+scanf("%ld",&list.ph);
+fflush(stdin);
+printf("address:");
+scanf("%[^\n]",&list.add);
+fflush(stdin);
+printf("email address:");
+gets(list.email);
+printf("\n");
+fwrite(&list,sizeof(list),1,fp);
+}
+fclose(fp);
+break;
+
+/* *********************list of contacts*************************  */
+case 2:
+system("cls");
+printf("\n\t\t================================\n\t\t\tLIST OF CONTACTS\n\t\t================================\n\nName\t\tPhone No\t    Address\t\tE-mail ad.\n=================================================================\n\n");
+
+for(i=97;i<=122;i=i+1)
+{
+
+fp=fopen("contact.dll","r");
+fflush(stdin);
+found=0;
+while(fread(&list,sizeof(list),1,fp)==1)
+{
+if(list.name[0]==i || list.name[0]==i-32)
+{
+printf("\nName\t: %s\nPhone\t: %ld\nAddress\t: %s\nEmail\t: %s\n",list.name,
+list.ph,list.add,list.email);
+found++;
+}
+}
+if(found!=0)
+{
+    printf("=========================================================== [%c]-(%d)\n\n",i-32,found);
+}
+fclose(fp);
+
+}
+
+break;
+
+
+
+/* *******************search contacts**********************  */
+case 3:
+system("cls");
+do
+{
+found=0;
+printf("\n\n\t..::CONTACT SEARCH\n\t===========================\n\t..::Name ofcontact to search: ");
+fflush(stdin);
+scanf("%[^\n]",&query);
+l=strlen(query);
+fp=fopen("contact.dll","r");
+
+system("cls");
+printf("\n\n..::Search result for '%s' \n===================================================\n",query);
+while(fread(&list,sizeof(list),1,fp)==1)
+{
+for(i=0;i<=l;i++)
+name[i]=list.name[i];
+name[l]='\0';
+if(stricmp(name,query)==0)
+{
+printf("\n..::Name\t: %s\n..::Phone\t: %ld\n..::Address\t: %s\n..::Email\t:%s\n",list.name,list.ph,list.add,list.email);
+found++;
+if (found%4==0)
+{
+printf("..::Press any key to continue...");
+getch();
+}
+}
+}
+
+if(found==0)
+printf("\n..::No match found!");
+else
+printf("\n..::%d match(s) found!",found);
+fclose(fp);
+printf("\n ..::Try again?\n\n\t[1] Yes\t\t[0] No\n\t");
+scanf("%d",&ch);
+}while(ch==1);
+break;
+
+
+/* *********************edit contacts************************/
+case 4:
+system("cls");
+fp=fopen("contact.dll","r");
+ft=fopen("temp.dat","w");
+fflush(stdin);
+printf("..::Edit contact\n===============================\n\n\t..::Enter thename of contact to edit:");
+scanf("%[^\n]",name);
+while(fread(&list,sizeof(list),1,fp)==1)
+{
+if(stricmp(name,list.name)!=0)
+fwrite(&list,sizeof(list),1,ft);
+}
+fflush(stdin);
+printf("\n\n..::Editing '%s'\n\n",name);
+printf("..::Name(Use identical):");
+scanf("%[^\n]",&list.name);
+fflush(stdin);
+printf("..::Phone:");
+scanf("%ld",&list.ph);
+fflush(stdin);
+printf("..::address:");
+scanf("%[^\n]",&list.add);
+fflush(stdin);
+printf("..::email address:");
+gets(list.email);
+printf("\n");
+fwrite(&list,sizeof(list),1,ft);
+fclose(fp);
+fclose(ft);
+remove("contact.dll");
+rename("temp.dat","contact.dll");
+break;
+
+
+/* ********************delete contacts**********************/
+case 5:
+system("cls");
+fflush(stdin);
+printf("\n\n\t..::DELETE A CONTACT\n\t==========================\n\t..::Enterthe name of contact to delete:");
+scanf("%[^\n]",&name);
+fp=fopen("contact.dll","r");
+ft=fopen("temp.dat","w");
+while(fread(&list,sizeof(list),1,fp)!=0)
+if (stricmp(name,list.name)!=0)
+fwrite(&list,sizeof(list),1,ft);
+fclose(fp);
+fclose(ft);
+remove("contact.dll");
+rename("temp.dat","contact.dll");
+break;
+
+default:
+printf("Invalid choice");
+break;
+}
+
+
+printf("\n\n\n..::Enter the Choice:\n\n\t[1] Main Menu\t\t[0] Exit\n");
+scanf("%d",&ch);
+switch (ch)
+{
+case 1:
+goto main;
+
+
+case 0:
+break;
+
+default:
+printf("Invalid choice");
+break;
+ }
+  }
+case 70:
+    {
+    d_mainmenu();
+    }
+case 80:
+    {
+        Password();
+      getch();
+    }
+
+ }
+ }
+return 0;
+}
+  void  addrecord( )
+
+{
+
+                system("cls");
+
+                FILE *fp ;
+
+                char another = 'Y' ,time[10];
+
+                struct record e ;
+
+                char filename[15];
+
+                int choice;
+
+                printf("\n\n\t\t***************************\n");
+
+                printf("\t\t* WELCOME TO THE ADD MENU *");
+
+                printf("\n\t\t***************************\n\n");
+
+                printf("\n\n\tENTER DATE OF YOUR RECORD:[yyyy-mm-dd]:");
+
+                fflush(stdin);
+
+                gets(filename);
+
+                fp = fopen (filename, "ab+" ) ;
+
+                if ( fp == NULL )
+
+                {
+
+                fp=fopen(filename,"wb+");
+
+                if(fp==NULL)
+
+                {
+
+                    printf("\nSYSTEM ERROR...");
+
+                    printf("\nPRESS ANY KEY TO EXIT");
+
+                    getch();
+
+                    return ;
+
+                }
+
+                }
+
+
+
+                while ( another == 'Y'|| another=='y' )
+
+                {
+
+                    choice=0;
+
+                    fflush(stdin);
+
+                printf ( "\n\tENTER TIME:[hh:mm]:");
+
+                scanf("%s",time);
+
+                rewind(fp);
+
+                while(fread(&e,sizeof(e),1,fp)==1)
+
+                {
+
+                    if(strcmp(e.time,time)==0)
+
+                    {
+
+                        printf("\n\tTHE RECORD ALREADY EXISTS.\n");
+
+                        choice=1;
+
+                    }
+
+                }
+
+                    if(choice==0)
+
+                    {
+
+                        strcpy(e.time,time);
+
+                        printf("\tENTER NAME:");
+
+                        fflush(stdin);
+
+                        gets(e.name);
+
+                        fflush(stdin);
+
+                        printf("\tENTER PLACE:");
+
+                        gets(e.place);
+
+                        fflush(stdin);
+
+                        printf("\tENTER DURATION:");
+
+                        gets(e.duration);
+
+                        fflush(stdin);
+
+                        printf("\tNOTE:");
+
+                        gets(e.note);
+
+                        fwrite ( &e, sizeof ( e ), 1, fp ) ;
+
+                        printf("\nYOUR RECORD IS ADDED...\n");
+
+                    }
+
+                        printf ( "\n\tADD ANOTHER RECORD...(Y/N) " ) ;
+
+                        fflush ( stdin ) ;
+
+                        another = getchar( ) ;
+
+                }
+
+
+                fclose ( fp ) ;
+
+                printf("\n\n\tPRESS ANY KEY TO EXIT...");
+
+                getch();
+
+    }
+
+
+void viewrecord( )
+
+{
+
+        FILE *fpte ;
+
+        system("cls");
+
+        struct record customer ;
+
+        char time[6],choice,filename[14];
+
+        int ch;
+
+        printf("\n\n\t\t*******************************\n");
+
+        printf("\t\t* HERE IS THE VIEWING MENU *");
+
+        printf("\n\t\t*******************************\n\n");
+
+        choice=password();
+
+        if(choice!=0)
+
+            {
+
+                return ;
+
+            }
+
+        do
+
+            {
+
+                    printf("\n\tENTER THE DATE OF RECORD TO BE VIEWED:[yyyy-mm-dd]:");
+
+                    fflush(stdin);
+
+                    gets(filename);
+
+
+                    fpte = fopen ( filename, "rb" ) ;
+
+                    if ( fpte == NULL )
+
+                            {
+
+                                puts ( "\nTHE RECORD DOES NOT EXIST...\n" ) ;
+
+                                printf("PRESS ANY KEY TO EXIT...");
+
+                                getch();
+
+                                return ;
+
+                            }
+
+                            system("cls");
+
+                printf("\n\tHOW WOULD YOU LIKE TO VIEW:\n");
+
+                printf("\n\t1.WHOLE RECORD OF THE DAY.");
+
+                printf("\n\t2.RECORD OF FIX TIME.");
+
+                printf("\n\t\tENTER YOUR CHOICE:");
+
+                scanf("%d",&ch);
+
+                switch(ch)
+
+                {
+
+                    case 1:
+
+                            printf("\nTHE WHOLE RECORD FOR %s IS:",filename);
+
+                         while ( fread ( &customer, sizeof ( customer ), 1, fpte ) == 1 )
+
+                         {
+
+                            printf("\n");
+
+                            printf("\nTIME: %s",customer.time);
+
+                            printf("\nMEETING WITH: %s",customer.name);
+
+                            printf("\nMEETING AT: %s",customer.place);
+
+                            printf("\nDURATION: %s",customer.duration);
+
+                            printf("\nNOTE: %s",customer.note);
+
+                            printf("\n");
+
+                         }
+
+                         break;
+
+
+                    case 2:
+
+                            fflush(stdin);
+
+                            printf("\nENTER TIME:[hh:mm]:");
+
+                            gets(time);
+
+                            while ( fread ( &customer, sizeof ( customer ), 1, fpte ) == 1 )
+
+
+                            {
+
+                                if(strcmp(customer.time,time)==0)
+
+                                {
+
+                                    printf("\nYOUR RECORD IS:");
+
+                                    printf("\nTIME: %s",customer.time);
+
+                                    printf("\nMEETING WITH: %s",customer.name);
+
+                                    printf("\nMEETING AT: %s",customer.place);
+
+                                    printf("\nDUARATION: %s",customer.duration);
+
+                                    printf("\nNOTE: %s",customer.note);
+
+                                }
+
+                            }
+
+                            break;
+
+
+                    default: printf("\nYOU TYPED SOMETHING ELSE...\n");
+
+                             break;
+
+                }
+
+
+               printf("\n\nWOULD YOU LIKE TO CONTINUE VIEWING...(Y/N):");
+
+               fflush(stdin);
+
+            scanf("%c",&choice);
+
+        }while(choice=='Y'||choice=='y');
+
+            fclose ( fpte ) ;
+
+            return ;
+
+}
+
+ void editrecord()
+
+{
+
+        system("cls");
+
+        FILE *fpte ;
+
+        struct record customer ;
+
+        char time[6],choice,filename[14];
+
+        int num,count=0;
+
+        printf("\n\n\t\t*******************************\n");
+
+        printf("\t\t* WELCOME TO THE EDITING MENU *");
+
+        printf("\n\t\t*******************************\n\n");
+
+        choice=password();
+
+        if(choice!=0)
+
+            {
+
+                return ;
+
+            }
+
+        do
+
+            {
+
+                    printf("\n\tENTER THE DATE OF RECORD TO BE EDITED:[yyyy-mm-dd]:");
+
+                    fflush(stdin);
+
+                    gets(filename);
+
+                    printf("\n\tENTER TIME:[hh:mm]:");
+
+                    gets(time);
+
+                    fpte = fopen ( filename, "rb+" ) ;
+
+                    if ( fpte == NULL )
+
+                            {
+
+                                printf( "\nRECORD DOES NOT EXISTS:" ) ;
+
+                                printf("\nPRESS ANY KEY TO GO BACK");
+
+                                getch();
+
+                                return;
+
+                            }
+
+                    while ( fread ( &customer, sizeof ( customer ), 1, fpte ) == 1 )
+
+                    {
+
+                        if(strcmp(customer.time,time)==0)
+
+                        {
+
+                            printf("\nYOUR OLD RECORD WAS AS:");
+
+                            printf("\nTIME: %s",customer.time);
+
+                            printf("\nMEETING WITH: %s",customer.name);
+
+                            printf("\nMEETING AT: %s",customer.place);
+
+                            printf("\nDURATION: %s",customer.duration);
+
+                            printf("\nNOTE: %s",customer.note);
+
+
+                            printf("\n\n\t\tWHAT WOULD YOU LIKE TO EDIT..");
+
+                                printf("\n1.TIME.");
+
+                                printf("\n2.MEETING PERSON.");
+
+                                printf("\n3.MEETING PLACE.");
+
+                                printf("\n4.DURATION.");
+
+                                printf("\n5.NOTE.");
+
+                                printf("\n6.WHOLE RECORD.");
+
+                                printf("\n7.GO BACK TO MAIN MENU.");
+
+                                do
+
+                                {
+
+                                        printf("\n\tENTER YOUR CHOICE:");
+
+                                        fflush(stdin);
+
+                                        scanf("%d",&num);
+
+                                        fflush(stdin);
+
+                                        switch(num)
+
+                                        {
+
+                                            case 1: printf("\nENTER THE NEW DATA:");
+
+                                                    printf("\nNEW TIME:[hh:mm]:");
+
+                                                    gets(customer.time);
+
+                                                    break;
+
+
+                                            case 2: printf("\nENTER THE NEW DATA:");
+
+                                                    printf("\nNEW MEETING PERSON:");
+
+                                                    gets(customer.name);
+
+                                                    break;
+
+
+                                            case 3: printf("\nENTER THE NEW DATA:");
+
+                                                    printf("\nNEW MEETING PLACE:");
+
+                                                    gets(customer.place);
+
+                                                    break;
+
+
+                                            case 4: printf("\nENTER THE NEW DATA:");
+
+                                                    printf("\nDURATION:");
+
+                                                    gets(customer.duration);
+
+                                                    break;
+
+
+                                            case 5: printf("ENTER THE NEW DATA:");
+
+                                                    printf("\nNOTE:");
+
+                                                    gets(customer.note);
+
+                                                    break;
+
+
+                                            case 6:  printf("\nENTER THE NEW DATA:");
+
+                                                     printf("\nNEW TIME:[hh:mm]:");
+
+                                                     gets(customer.time);
+
+                                                     printf("\nNEW MEETING PERSON:");
+
+                                                     gets(customer.name);
+
+                                                     printf("\nNEW MEETING PLACE:");
+
+                                                     gets(customer.place);
+
+                                                     printf("\nDURATION:");
+
+                                                     gets(customer.duration);
+
+                                                     printf("\nNOTE:");
+
+                                                     gets(customer.note);
+
+                                                     break;
+
+
+                                            case 7: printf("\nPRESS ANY KEY TO GO BACK...\n");
+
+                                                    getch();
+
+                                                    return ;
+
+                                                    break;
+
+
+                                            default: printf("\nYOU TYPED SOMETHING ELSE...TRY AGAIN\n");
+
+                                                     break;
+
+                                        }
+
+
+                                }while(num<1||num>8);
+
+                            fseek(fpte,-sizeof(customer),SEEK_CUR);
+
+                            fwrite(&customer,sizeof(customer),1,fpte);
+
+                            fseek(fpte,-sizeof(customer),SEEK_CUR);
+
+                            fread(&customer,sizeof(customer),1,fpte);
+
+                            choice=5;
+
+                            break;
+
+                        }
+
+                    }
+
+                    if(choice==5)
+
+                    {
+
+                    system("cls");
+
+                    printf("\n\t\tEDITING COMPLETED...\n");
+
+                    printf("--------------------\n");
+
+                    printf("THE NEW RECORD IS:\n");
+
+                    printf("--------------------\n");
+
+                    printf("\nTIME: %s",customer.time);
+
+                    printf("\nMEETING WITH: %s",customer.name);
+
+                    printf("\nMEETING AT: %s",customer.place);
+
+                    printf("\nDURATION: %s",customer.duration);
+
+                    printf("\nNOTE: %s",customer.note);
+
+                    fclose(fpte);
+
+                    printf("\n\n\tWOULD YOU LIKE TO EDIT ANOTHER RECORD.(Y/N)");
+
+                    scanf("%c",&choice);
+
+                    count++;
+
+                    }
+
+                    else
+
+                    {
+
+                        printf("\nTHE RECORD DOES NOT EXIST::\n");
+
+                        printf("\nWOULD YOU LIKE TO TRY AGAIN...(Y/N)");
+
+                        scanf("%c",&choice);
+
+                    }
+
+
+            }while(choice=='Y'||choice=='y');
+
+            fclose ( fpte ) ;
+
+
+            if(count==1)
+
+            printf("\n%d FILE IS EDITED...\n",count);
+
+            else if(count>1)
+
+            printf("\n%d FILES ARE EDITED..\n",count);
+
+            else
+
+            printf("\nNO FILES EDITED...\n");
+
+            printf("\tPRESS ENTER TO EXIT EDITING MENU.");
+
+            getch();
+
+}
+
+  int password()
+
+{
+
+        char pass[15]={0},check[15]={0},ch;
+
+        FILE *fpp;
+
+        int i=0,j;
+
+        printf("::FOR SECURITY PURPOSE::");
+
+        printf("::ONLY THREE TRIALS ARE ALLOWED::");
+
+        for(j=0;j<3;j++)
+
+        {
+
+                        i=0;
+
+                        printf("\n\n\tENTER THE PASSWORD:");
+
+                        pass[0]=getch();
+
+                        while(pass[i]!='\r')
+
+                        {
+
+                            if(pass[i]=='\b')
+
+                            {
+
+                                i--;
+
+                                printf("\b");
+
+                                printf(" ");
+
+                                printf("\b");
+
+                                pass[i]=getch();
+
+                            }
+
+                            else
+
+                            {
+
+                                printf("*");
+
+                                i++;
+
+                                pass[i]=getch();
+
+                            }
+
+                        }
+
+                        pass[i]='\0';
+
+                        fpp=fopen("SE","r");
+
+                        if (fpp==NULL)
+
+                        {
+
+                            printf("\nERROR WITH THE SYSTEM FILE...[FILE MISSING]\n");
+
+                            getch();
+
+                            return 1;
+
+                        }
+
+                        else
+
+                        i=0;
+
+                        while(1)
+
+                        {
+
+                            ch=fgetc(fpp);
+
+                            if(ch==EOF)
+
+                            {
+
+                                check[i]='\0';
+
+                                break;
+
+                            }
+
+                            check[i]=ch-5;
+
+                            i++;
+
+                        }
+
+                        if(strcmp(pass,check)==0)
+
+                        {
+
+                            printf("\n\n\tACCESS GRANTED...\n");
+
+                            return 0;
+
+                        }
+
+                        else
+
+                        {
+
+                            printf("\n\n\tWRONG PASSWORD..\n\n\tACCESS DENIED...\n");
+
+                        }
+
+        }
+
+        printf("\n\n\t::YOU ENTERED WRONG PASSWORD::YOU ARE NOT ALLOWED TO ACCESS ANY FILE::\n\n\tPRESS ANY KEY TO GO BACK...");
+
+        getch();
+
+        return 1;
+
+}
+
+void editpassword()
+
+{
+
+    system("cls");
+
+    printf("\n");
+
+    char pass[15]={0},confirm[15]={0},ch;
+
+    int choice,i,check;
+
+    FILE *fp;
+
+    fp=fopen("SE","rb");
+
+    if(fp==NULL)
+
+    {
+
+        fp=fopen("SE","wb");
+
+        if(fp==NULL)
+
+        {
+
+            printf("SYSTEM ERROR...");
+
+            getch();
+
+            return ;
+
+        }
+
+        fclose(fp);
+
+        printf("\nSYSTEM RESTORED...\nYOUR PASSWORD IS 'ENTER'\n PRESS ENTER TO CHANGE PASSWORD\n\n");
+
+        getch();
+
+    }
+
+        fclose(fp);
+
+        check=password();
+
+    if(check==1)
+
+    {
+
+        return ;
+
+    }
+
+    do
+
+    {
+
+        if(check==0)
+
+                    {
+
+                        i=0;
+
+                        choice=0;
+
+                        printf("\n\n\tENTER THE NEW PASSWORD:");
+
+                        fflush(stdin);
+
+                        pass[0]=getch();
+
+                        while(pass[i]!='\r')
+
+                        {
+
+                            if(pass[i]=='\b')
+
+                            {
+
+                                i--;
+
+                                printf("\b");
+
+                                printf(" ");
+
+                                printf("\b");
+
+                                pass[i]=getch();
+
+                            }
+
+                            else
+
+                            {
+
+                                printf("*");
+
+                                i++;
+
+                                pass[i]=getch();
+
+                            }
+
+                        }
+
+                        pass[i]='\0';
+
+                        i=0;
+
+                        printf("\n\tCONFIRM PASSWORD:");
+
+                        confirm[0]=getch();
+
+                        while(confirm[i]!='\r')
+
+                        {
+
+                            if(confirm[i]=='\b')
+
+                            {
+
+                                i--;
+
+                                printf("\b");
+
+                                printf(" ");
+
+                                printf("\b");
+
+                                confirm[i]=getch();
+
+                            }
+
+                            else
+
+                            {
+
+                                printf("*");
+
+                                i++;
+
+                                confirm[i]=getch();
+
+                            }
+
+                        }
+
+                        confirm[i]='\0';
+
+                        if(strcmp(pass,confirm)==0)
+
+                        {
+
+                            fp=fopen("SE","wb");
+
+                            if(fp==NULL)
+
+                            {
+
+                                printf("\n\t\tSYSTEM ERROR");
+
+                                getch();
+
+                                return ;
+
+                            }
+
+                            i=0;
+
+                            while(pass[i]!='\0')
+
+                            {
+
+                                ch=pass[i];
+
+                                putc(ch+5,fp);
+
+                                i++;
+
+                            }
+
+                            putc(EOF,fp);
+
+                            fclose(fp);
+
+                        }
+
+                        else
+
+                        {
+
+                            printf("\n\tTHE NEW PASSWORD DOES NOT MATCH.");
+
+                            choice=1;
+
+
+                        }
+
+
+                    }
+
+}while(choice==1);
+
+
+    printf("\n\n\tPASSWORD CHANGED...\n\n\tPRESS ANY KEY TO GO BACK...");
+
+    getch();
+
+}
+
+
+ void deleterecord( )
+
+{
+
+                system("cls");
+
+                FILE *fp,*fptr ;
+
+                struct record file ;
+
+                char filename[15],another = 'Y' ,time[10];;
+
+                int choice,check;
+
+                printf("\n\n\t\t*************************\n");
+
+                printf("\t\t* WELCOME TO DELETE MENU*");
+
+                printf("\n\t\t*************************\n\n");
+
+                check = password();
+
+                    if(check==1)
+
+                    {
+
+                        return ;
+
+                    }
+
+
+                while ( another == 'Y' )
+
+                {
+
+                printf("\n\n\tHOW WOULD YOU LIKE TO DELETE.");
+
+                printf("\n\n\t#DELETE WHOLE RECORD\t\t\t[1]");
+
+                printf("\n\t#DELETE A PARTICULAR RECORD BY TIME\t[2]");
+
+
+                do
+
+                {
+
+                        printf("\n\t\tENTER YOU CHOICE:");
+
+                        scanf("%d",&choice);
+
+
+                    switch(choice)
+
+                        {
+
+                            case 1:
+
+                            printf("\n\tENTER THE DATE OF RECORD TO BE DELETED:[yyyy-mm-dd]:");
+
+                            fflush(stdin);
+
+                            gets(filename);
+
+                            fp = fopen (filename, "wb" ) ;
+
+                            if ( fp == NULL )
+
+                            {
+
+                                printf("\nTHE FILE DOES NOT EXISTS");
+
+                                printf("\nPRESS ANY KEY TO GO BACK.");
+
+                                getch();
+
+                                return ;
+
+                            }
+
+                            fclose(fp);
+
+                            remove(filename);
+
+                            printf("\nDELETED SUCCESFULLY...");
+
+                            break;
+
+
+                            case 2:
+
+                            printf("\n\tENTER THE DATE OF RECORD:[yyyy-mm-dd]:");
+
+                            fflush(stdin);
+
+                            gets(filename);
+
+                            fp = fopen (filename, "rb" ) ;
+
+                            if ( fp == NULL )
+
+                            {
+
+                                printf("\nTHE FILE DOES NOT EXISTS");
+
+                                printf("\nPRESS ANY KEY TO GO BACK.");
+
+                                getch();
+
+                                return ;
+
+                            }
+
+                            fptr=fopen("temp","wb");
+
+                            if(fptr==NULL)
+
+                            {
+
+                                printf("\nSYSTEM ERROR");
+
+                                printf("\nPRESS ANY KEY TO GO BACK");
+
+                                getch();
+
+                                return ;
+
+                            }
+
+                            printf("\n\tENTER THE TIME OF RECORD TO BE DELETED:[hh:mm]:");
+
+                            fflush(stdin);
+
+                            gets(time);
+
+                            while(fread(&file,sizeof(file),1,fp)==1)
+
+                            {
+
+                                if(strcmp(file.time,time)!=0)
+
+                                fwrite(&file,sizeof(file),1,fptr);
+
+                            }
+
+
+                            fclose(fp);
+
+                            fclose(fptr);
+
+                            remove(filename);
+
+                            rename("temp",filename);
+
+                            printf("\nDELETED SUCCESFULLY...");
+
+                            break;
+
+
+                    default:
+
+                            printf("\n\tYOU ENTERED WRONG CHOICE");
+
+                            break;
+
+                    }
+
+                }while(choice<1||choice>2);
+
+
+
+                    printf("\n\tDO YOU LIKE TO DELETE ANOTHER RECORD.(Y/N):");
+
+                    fflush(stdin);
+
+                    scanf("%c",&another);
+
+                }
+
+                printf("\n\n\tPRESS ANY KEY TO EXIT...");
+
+
+    }
+
+    void gotoxy(int x,int y)
+{
+    coord.X=x;
+    coord.Y=y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
+}
+/*declaration of checking functions*/
+void c_code(char[]);
+int check(char[]);
+
+/*structure declaration*/
+typedef struct{
+char name[ANS],code[ACS];
+float rate;
+int quantity;
+}rec;
+rec item;
+
+/*declaration of display functions*/
+void curser(int);
+void dbill();
+void d_mainmenu();
+void display(rec *,int,int);
+void window(int,int,int,int);
+void dis_con();
+void d_search();
+void highlight(int,int);
+
+/*declaration of main menu functions*/
+void bill() ;
+void edit();
+void add();
+void del();
+void exit();
+
+/*declaration of display submenu functions*/
+void d_code();
+void d_rate();
+void d_quan();
+void d_all();
+
+void d_mainmenu()
+{
+ int i;
+ char ch;
+ const char *menu[]={"   Calculate Bill","   Add Goods","   Edit Goods","   Display All ","   Search", "   Delete Goods","   Exit"};
+ system("cls");
+ //textbackground(11);
+ //textcolor(0);
+ //_setcursortype(_NOCURSOR);
+ window(25,50,20,32);
+ gotoxy(33,18);printf("MAIN MENU");
+ for (i=0;i<=6;i++){
+  gotoxy(30,22+i+1);printf("%s\n\n\n",menu[i]);}
+  curser(7);
+ }
+
+void d_search()
+{
+ char ch;
+ int i;
+    const char *menu[]={"   By Code","   By Rate","   By Quantity","   Back to main menu"};
+ system("cls");
+ //textbackground(11);
+ //textcolor(0);
+ window(25,50,20,32);
+ gotoxy(33,18);printf("SEARCH MENU");
+ for (i=0;i<=3;i++){
+ gotoxy(30,22+i+1);printf("%s\n\n\n",menu[i]);}
+ curser(4);
+}
+
+/*function for cursor movement*/
+void curser(int no)
+{
+    int count=1;
+    char ch='0';
+    gotoxy(30,23);
+ while(1){
+  switch(ch){
+   case 80:
+    count++;
+    if (count==no+1) count=1;
+    break;
+   case 72:
+    count--;
+    if(count==0) count=no;
+    break;
+  }
+  highlight(no,count);
+  ch=getch();
+  if(ch=='\r'){
+   if(no==7){
+    if (count==1) bill() ;
+    else if(count==2) add();
+    else if(count==3) edit();
+    else if (count==4) d_all();
+    else if (count==5) d_search();
+    else if (count==6) del();
+    else   exit(0);
+   }
+   if(no==4){
+    if (count==1) d_code();
+    else if (count==2)d_rate();
+    else if (count==3) d_quan();
+    else d_mainmenu();
+   }
+  }
+ }
+}
+
+void highlight(int no,int count)
+{
+ if (no==4){
+  //textbackground(11);
+  //textcolor(0);
+  gotoxy(30,23);printf("   By Code          ");
+  gotoxy(30,24);printf("   By Rate          ");
+  gotoxy(30,25);printf("   By Quantity      ");
+  gotoxy(30,26);printf("   Back to main menu");
+  //textcolor(0);
+  //textbackground(2);
+  switch (count)
+  {
+   case 1:
+    gotoxy(30,23);
+    printf(" - By Code          ");
+    break;
+   case 2:
+    gotoxy(30,24);
+    printf(" - By Rate          ");
+    break;
+   case 3:
+    gotoxy(30,25);
+    printf(" - By Quantity      ");
+    break;
+   case 4:
+    gotoxy(30,26);
+    printf(" - Back to main menu");
+    break;
+  }
+ }
+
+ if(no==7){
+  //textbackground(11);
+  //textcolor(0);
+  gotoxy (30,23);printf("   Calculate Bill ");
+  gotoxy (30,24);printf("   Add Goods      ");
+  gotoxy (30,25);printf("   Edit Goods     ");
+  gotoxy (30,26);printf("   Display All    ");
+  gotoxy (30,27);printf("   Search         ");
+  gotoxy (30,28);printf("   Delete Goods   ");
+  gotoxy (30,29);printf("   Exit           ");
+  //textcolor(0);
+  //textbackground(2);
+  switch(count){
+   case 1:
+    gotoxy (30,23);
+    printf(" - Calculate Bill ");
+    break;
+   case 2:
+    gotoxy (30,24);
+    printf(" - Add Goods      ");
+    break;
+   case 3:
+    gotoxy (30,25);
+    printf(" - Edit Goods     ");
+    break;
+   case 4:
+    gotoxy (30,26);
+    printf(" - Display All    ");
+    break;
+   case 5:
+    gotoxy (30,27);
+    printf(" - Search         ");
+    break;
+   case 6:
+    gotoxy (30,28);
+    printf(" - Delete Goods   ");
+    break;
+   case 7:
+    gotoxy (30,29);
+    printf(" - Exit           ");
+    break;
+  }
+ }
+}
+
+void bill()
+{
+  char x[4]={0};
+  int j=29,q=0,size=0,i=1;
+  float total=0,gtotal=0;
+  FILE *file;
+  file=fopen("record.txt","r+b");
+  rewind(file);
+  system("cls");
+  dbill();
+  gotoxy(26,15);printf("enter  \"end\" to finish input");
+  while(1){
+  gotoxy(25,18);printf("                    ");
+  gotoxy(25,19);printf("                    ");
+  gotoxy(25,18);printf("enter item code:");
+  scanf("%s",x);
+  if(strcmp(x,"end")==0)
+   break;
+  gotoxy(25,19);printf("enter quantity:");
+  scanf("%d",&q);
+  rewind(file);
+  while(fread(&item,sizeof(item),1,file)){
+   if((strcmp(item.code,x)==0)){
+    total=item.rate*q;
+    gotoxy(11,j);printf("%4d",i);
+    printf("%9s",item.name);
+    printf("%13d",q);
+    printf("%15.2f",item.rate);
+    printf("%13.2f",total);
+    gtotal=gtotal+total;
+    size=sizeof(item);
+    item.quantity=item.quantity-q;
+    j+=2; i++;
+    fseek(file,-size,SEEK_CUR);fwrite(&item,sizeof(item),1,file);
+    break;
+   }
+    }
+ }
+ if(gtotal!=0){
+  gotoxy(30,j+5);
+  printf("TOTAL AMOUNT = NRs. %6.2f",gtotal);
+ }
+ fclose(file);
+ getch();
+ d_mainmenu();
+}
+ /*function to display bill window*/
+void dbill()
+{
+ int i;
+ gotoxy(20,10);
+ //;
+ for (i=1;i<=10;i++)
+  printf("*");
+ printf(" * FASHION WEAR * ");
+ for (i=1;i<=10;i++)
+        printf("*");
+ printf("\n\n");
+ gotoxy(30,11);printf("Departmental Store");
+ //textcolor(1);
+ gotoxy(32,25);printf("CUSTOMER'S BILL") ;
+ //textcolor(8);
+ gotoxy(13,27);printf("SN.   Item Name     Quantity     Rate          Total");
+
+}
+/*function to add records*/
+void add ()
+{
+ FILE *file;
+ char y[ACS],x[12];
+ system("cls");
+ //textbackground(11);
+ //textcolor(0);
+ gotoxy(25,25);printf("Enter new record(Y/N)?");
+ while(toupper(getche())=='Y'){
+  system("cls");
+  file=fopen("record.txt","ab");
+  c_code(y);
+  strcpy(item.code,y);
+  gotoxy(22,28);printf("Enter rate of the item:");
+  scanf("%f",&item.rate);
+  gotoxy(22,30);printf("Enter quantity of the item:");
+  scanf("%d",&item.quantity);
+  gotoxy(22,32);printf("Enter name of the item:");
+  scanf("%s",item.name);
+  fseek(file,0,SEEK_END);fwrite(&item,sizeof(item),1,file);
+  fclose(file);
+  gotoxy(22,34);printf("Enter new record(Y/N)?");
+
+   }
+   d_mainmenu();
+}
+
+ /*function to check availability of code*/
+void c_code(char y[])
+{
+ int flag;
+ FILE *file;
+ file=fopen("record.txt","rb");
+ while(1){
+  system("cls");
+  window(20,58,23,36);
+  gotoxy(32,18);printf(" ADD ARTICLES ")  ;
+  flag=1;
+  rewind(file);
+  gotoxy(22,25);printf("Enter new code of the article:");
+  scanf(" %[^\n]",y);
+  while(fread(&item,sizeof(item),1,file)==1){
+   if (strcmp(y,item.code)==0){
+    flag=0;
+    gotoxy(26,30);printf("code already exists");
+    gotoxy(29,32);printf("enter again");getch();
+    break;
+   }
+  }
+  if (flag==1)
+  break;
+ }
+}
+
+/*function for editing*/
+void edit()
+{
+ int flag=0,choice;
+ char x[ACS],y[ACS];
+ FILE *file;
+ int size;
+ system("cls");
+ //textcolor(0);
+ //textbackground(11);
+ window(20,63,20,46);
+ gotoxy(35,18);printf("EDIT RECORDS");
+ ;
+ gotoxy(25,23);printf("enter item code: ");
+ scanf("%s",x);
+ flag=check(x);
+ if(flag==0){
+  file=fopen("record.txt","r+b");
+  rewind(file);
+  while (fread(&item,sizeof (item),1,file)){
+   if(strcmp(item.code,x)==0){
+    //textcolor(0);
+    gotoxy(25,27);printf("name       = %s",item.name);
+    gotoxy(25,28);printf("code       = %s",item.code);
+    gotoxy(25,29);printf("rate       = %g",item.rate);
+    gotoxy(25,30);printf("quantity   = %d",item.quantity);
+    gotoxy(25,32);; printf("do you want to edit this record(y/n):");
+    fflush(file);
+    if(toupper(getche())=='Y'){
+     //textcolor(0);
+     gotoxy(25,34); printf("1- edit name ");
+     gotoxy(25,35); printf("2- edit code ");
+     gotoxy(25,36); printf("3- edit rate ");
+     gotoxy(25,37); printf("4- edit quantity ");
+     gotoxy(25,39);  ; printf(" enter your choice(1, 2, 3, 4) ");
+     scanf("%d",&choice);
+     switch(choice){
+      case 1:
+       system("cls");
+       window(23,48,20,40);
+       gotoxy(35,18);printf("EDIT RECORDS");
+       gotoxy(25,24); printf(" enter new name: ");
+       scanf("%s",item.name);
+       size=sizeof(item);
+       fseek(file,-size,SEEK_CUR);fwrite(&item,sizeof(item),1,file);
+       break;
+      case 2:
+       system("cls");
+       window(23,65,20,40);
+       gotoxy(35,18);printf("EDIT RECORDS");
+       gotoxy(25,24);
+       c_code(y);
+       strcpy(item.code,y);
+       size=sizeof(item);
+       fseek(file,-size,SEEK_CUR);fwrite(&item,sizeof(item),1,file);
+       break;
+      case 3:
+       system("cls");
+       window(23,65,20,40);
+       gotoxy(35,18);printf("EDIT RECORDS");
+       gotoxy(25,24);
+       printf(" enter new rate: ");
+       scanf("%f",&item.rate);
+       size=sizeof(item);
+       fseek(file,-size,SEEK_CUR);fwrite(&item,sizeof(item),1,file);
+       break;
+      case 4:
+       system("cls");
+       window(23,65,20,40);
+       gotoxy(35,18);printf("EDIT RECORDS");
+       gotoxy(25,24);
+       printf(" enter new quantity: ");
+       scanf("%d",&item.quantity);
+       size=sizeof(item);
+       fseek(file,-size,1);fwrite(&item,sizeof(item),1,file);
+       break;
+     }
+     gotoxy(27,30);printf("--- item edited---");
+     break;
+    }
+   }
+  }
+ }
+ if (flag==1){
+  gotoxy(32,30);printf("item does not exist");
+  gotoxy(36,32);printf("TRY ABGAIN");
+ }
+ getch();
+ fclose(file);
+ d_mainmenu();
+}
+
+/*function to display all records*/
+void d_all()
+{
+ int i,j=1;
+ FILE *file;
+ dis_con();
+ file=fopen("record.txt","rb");
+ rewind(file);
+ i=26;
+ fflush(file);
+ while(fread(&item,sizeof(item),1,file)){
+  display(&item,i,j);
+  i++;
+  j++;
+  if ((j%20)==0){
+         gotoxy(27,47);/*textcolor(0)*/;printf("press any key to see more...........");
+         getch();
+         system("cls");
+         dis_con();
+         i=26;
+         continue;
+  }
+  }
+  getch();
+  if (i==26) {
+  gotoxy(24,30); printf("-- no articles found --");
+ }
+ getch();
+ fclose(file);
+ d_mainmenu();
+}
+
+/*function to display by quantity*/
+void d_quan()
+{
+  int i,j=1;
+  int a,b;
+  FILE *file;
+  dis_con();
+  file=fopen("record.txt","rb");
+  rewind(file);
+  i=26;
+  gotoxy(16,20);;printf("enter lower range: ");
+  scanf("%d",&a);
+  gotoxy(16,21);printf("enter upper range:");
+  scanf("%d",&b);
+  fflush(file);
+  while(fread(&item,sizeof(item),1,file)){
+  if((item.quantity>=a)&&(item.quantity<=b)){
+   display(&item,i,j);
+   i++;
+   j++;
+   if ((j%20)==0){
+    gotoxy(27,47);printf("press any key to see more...........");
+    getch();
+    system("cls");
+    dis_con();
+    i=26;
+    continue;
+   }
+     }
+  }
+  getch();
+  if (i==26){
+  gotoxy(28,30); printf(" no item found ");
+ }
+ getch();
+ d_search();
+ fclose(file);
+}
+
+/*function to display by rate*/
+void d_rate(){
+  int i,j=1;
+  float a,b;
+  FILE *file;
+  dis_con();
+  file=fopen("record.txt","rb");
+  rewind(file);
+  i=26;
+  gotoxy(16,20);;printf("enter lower range: ");
+  scanf("%f",&a);
+  gotoxy(16,21);printf("enter upper range: ");
+  scanf("%f",&b);
+  fflush(file);
+  while(fread(&item,sizeof(item),1,file)){
+  if((item.rate>=a)&&(item.rate<=b)){
+   display(&item,i,j);
+   i++;
+   j++;
+   if ((j%20)==0){
+    gotoxy(27,47);printf("press any key to see more...........");
+    getch();
+    system("cls");
+    dis_con();
+    i=26;
+    continue;
+   }
+  }
+  }
+ getch();
+ if (i==26){
+  gotoxy(28,30); printf(" no item found ");
+ }
+ getch();
+ fclose(file);
+ d_search();
+}
+
+/*function to display by code*/
+void d_code()
+{
+  int i,j=1;
+  char x[4]={0};
+  FILE *file;
+  dis_con();
+  file=fopen("record.txt","rb");
+  rewind(file);
+  i=26;
+  gotoxy(16,20);;printf("enter item code: ");
+  scanf("%s",x);
+  fflush(file);
+  while(fread(&item,sizeof(item),1,file)){
+  if((strcmp(item.code,x)==0)){
+   display(&item,i,j);
+   i++;
+   j++;
+   break;
+  }
+  }
+  if (i==26){
+  gotoxy(28,30); printf("no item found");
+  }
+  getch();
+  fclose(file);
+  d_search();
+}
+
+/*function to display window for item display*/
+void dis_con()
+{
+ int i;
+ system("cls");
+ gotoxy(20,10);
+ ;
+ for (i=1;i<=10;i++)
+  printf("*");
+ printf(" * FASHION WEAR * ");
+ for (i=1;i<=10;i++)
+        printf("*");
+ printf("\n\n");
+ gotoxy(30,11);printf("Departmental Store");
+ //textcolor(1);
+ gotoxy(32,17);printf("RECORDS") ;
+ //textcolor(8);
+ gotoxy(18,23);printf ("SN   Item Name   Item Code      Rate     Quantity");
+}
+
+/*function to display in screen*/
+void display(rec *item,int i,int j)
+{
+ gotoxy(16,i);//textcolor(13);
+ printf("%4d",j);
+ printf("%9s",item->name);
+ printf("%12s",item->code);
+ printf("%14.2f",item->rate);
+ printf("%11d",item->quantity);
+}
+
+/*function to delete records*/
+void del()
+{
+ int flag;
+ char x[ANS];
+ FILE *file,*file1;
+ system("cls");
+ //textbackground(11);
+ //textcolor(0);
+ window(23,51,25,34);
+ gotoxy(29,18);printf("DELETE ARTICLES");
+ gotoxy(27,27);printf("enter item code: ");
+ scanf("%s",x);
+ flag=check(x);
+ if(flag==0){
+  file1=fopen("record1.txt","ab");
+  file=fopen("record.txt","rb");
+  rewind(file);
+  while (fread(&item,sizeof (item),1,file)){
+   if(strcmp(item.code,x)!=0)
+    fwrite(&item,sizeof(item),1,file1);
+  }
+  gotoxy(27,29);printf("---item deleted---");
+  remove("record.txt");
+  rename("record1.txt","record.txt");
+ }
+ if (flag==1){
+  gotoxy(25,29);printf("---item does not exist---");
+  gotoxy(30,31);printf("TRY AGAIN");
+ }
+ fclose(file1);
+ fclose(file);
+ getch();
+ d_mainmenu();
+}
+
+/*function to check validity of code while editing and deleting*/
+int check(char x[ANS])
+{
+ FILE *file;
+ int flag=1;
+ file=fopen("record.txt","rb");
+ rewind(file);
+ while (fread(&item,sizeof (item),1,file)){
+  if(strcmp(item.code,x)==0){
+   flag=0;
+   break;
+  }
+ }
+ fclose(file);
+ return flag;
+ }
+
+/*function to display box*/
+void window(int a,int b,int c,int d)
+{
+ int i;
+ system("cls");
+ gotoxy(20,10);
+ //textcolor(1);
+ for (i=1;i<=10;i++)
+  printf("*");
+ printf(" * FASHION WEAR * ");
+ for (i=1;i<=10;i++)
+        printf("*");
+ printf("\n\n");
+ gotoxy(30,11);printf("Departmental Store");
+ //textcolor(4);
+ for (i=a;i<=b;i++){
+        gotoxy(i,17);printf("\xcd");
+        gotoxy(i,19);printf("\xcd");
+        gotoxy(i,c);printf("\xcd");
+        gotoxy(i,d);printf("\xcd");
+        }
+
+ gotoxy(a,17);printf("\xc9");
+ gotoxy(a,18);printf("\xba");
+ gotoxy(a,19);printf("\xc8");
+ gotoxy(b,17);printf("\xbb");
+ gotoxy(b,18);printf("\xba");
+ gotoxy(b,19);printf("\xbc");
+ //textcolor(4);
+ for(i=c;i<=d;i++){
+  gotoxy(a,i);printf("\xba");
+  gotoxy(b,i);printf("\xba");
+ }
+ gotoxy(a,c);printf("\xc9");
+ gotoxy(a,d);printf("\xc8");
+ gotoxy(b,c);printf("\xbb");
+ gotoxy(b,d);printf("\xbc");
+ //textbackground(11);
+ //textcolor(0);
+}
+/*void gotoxy (int x, int y)
+{
+        coord.X = x; coord.Y = y; // X and Y coordinates
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}*/
+void delay(unsigned int mseconds)
+{
+    clock_t goal = mseconds + clock();
+    while (goal > clock());
+}
+void mainmenu()
+{
+	//loaderanim();
+    system("cls");
+       //	textbackground(13);
+	int i;
+	gotoxy(20,3);
+	printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2 MAIN MENU \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+	//show_mouse();
+	gotoxy(20,5);
+	printf("\xDB\xDB\xDB\xDB\xB2 1. Add Books   ");
+	gotoxy(20,7);
+	printf("\xDB\xDB\xDB\xDB\xB2 2. Delete books");
+	gotoxy(20,9);
+	printf("\xDB\xDB\xDB\xDB\xB2 3. Search Books");
+	gotoxy(20,11);
+	printf("\xDB\xDB\xDB\xDB\xB2 4. Issue Books");
+	gotoxy(20,13);
+	printf("\xDB\xDB\xDB\xDB\xB2 5. View Book list");
+	gotoxy(20,15);
+	printf("\xDB\xDB\xDB\xDB\xB2 6. Edit Book's Record");
+	gotoxy(20,17);
+	printf("\xDB\xDB\xDB\xDB\xB2 7. Close Application");
+	gotoxy(20,19);
+	printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+	gotoxy(20,20);
+	t();
+	gotoxy(20,21);
+	printf("Enter your choice:");
+	switch(getch())
+	{
+		case '1':
+		addbooks();
+		break;
+	case '2':
+		deletebooks();
+		break;
+		case '3':
+		searchbooks();
+	    break;
+	case '4':
+		issuebooks();
+	    break;
+	    case '5':
+		viewbooks();
+		break;
+	    case '6':
+		editbooks();
+		break;
+	    case '7':
+	    {
+		system("cls");
+		gotoxy(16,3);
+		printf("Programmers....");
+		gotoxy(16,4);
+		printf("1. Bibek Subedi       (066/BCT/506)");
+		gotoxy(16,5);
+		printf("   Mobile:9846311430  E-mail:subedi_bibek@yahoo.co.in");
+		gotoxy(16,7);
+		printf("2. Dinesh Subedi      (066/BCT/512)");
+		gotoxy(16,8);
+		printf("   Mobile:9841569394  E-mail:smokindinesh@gmail.com");
+		gotoxy(16,10);
+		printf("3. Sijan Bhandari      (066/BCT/537)");
+		gotoxy(16,11);
+		printf("   Mobile:9849516774   E-mail:sijan_nasa@yahoo.com");
+		gotoxy(16,13);
+		printf("With  the Unexplainable Help of Mr.Ashok Basnet");
+		gotoxy(10,17);
+		printf("Exiting in 3 second...........>");
+		//flushall();
+		delay(3000);
+		exit(0);
+	    }
+	    default:
+		{
+		gotoxy(10,23);
+		printf("\aWrong Entry!!Please re-entered correct option");
+		if(getch())
+		mainmenu();
+		}
+
+    }
+}
+void addbooks(void)    //funtion that add books
+{
+	system("cls");
+	int i;
+	gotoxy(20,5);
+	printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2SELECT CATEGOIES\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+	gotoxy(20,7);
+	printf("\xDB\xDB\xDB\xDB\xB2 1. Computer");
+	gotoxy(20,9);
+	printf("\xDB\xDB\xDB\xDB\xB2 2. Electronics");
+	gotoxy(20,11);
+	printf("\xDB\xDB\xDB\xDB\xB2 3. Electrical");
+	gotoxy(20,13);
+	printf("\xDB\xDB\xDB\xDB\xB2 4. Civil");
+	gotoxy(20,15);
+	printf("\xDB\xDB\xDB\xDB\xB2 5. Mechanical");
+	gotoxy(20,17);
+	printf("\xDB\xDB\xDB\xDB\xB2 6. Architecture");
+	gotoxy(20,19);
+	printf("\xDB\xDB\xDB\xDB\xB2 7. Back to main menu");
+	gotoxy(20,21);
+	printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+	gotoxy(20,22);
+	printf("Enter your choice:");
+	scanf("%d",&s);
+	if(s==7)
+
+	mainmenu() ;
+	system("cls");
+	fp=fopen("Bibek.dat","ab+");
+	if(getdata()==1)
+	{
+	a.cat=catagories[s-1];
+	fseek(fp,0,SEEK_END);
+	fwrite(&a,sizeof(a),1,fp);
+	fclose(fp);
+	gotoxy(21,14);
+	printf("The record is sucessfully saved");
+	gotoxy(21,15);
+	printf("Save any more?(Y / N):");
+	if(getch()=='n')
+	    mainmenu();
+	else
+	    system("cls");
+	    addbooks();
+	}
+}
+void deletebooks()    //function that delete items from file fp
+{
+    system("cls");
+    int d;
+    char another='y';
+    while(another=='y')  //infinite loop
+    {
+	system("cls");
+	gotoxy(10,5);
+	printf("Enter the Book ID to  delete:");
+	scanf("%d",&d);
+	fp=fopen("Bibek.dat","rb+");
+	rewind(fp);
+	while(fread(&a,sizeof(a),1,fp)==1)
+	{
+	    if(a.id==d)
+	    {
+
+		gotoxy(10,7);
+		printf("The book record is available");
+		gotoxy(10,8);
+		printf("Book name is %s",a.name);
+		gotoxy(10,9);
+		printf("Rack No. is %d",a.rackno);
+		findbook='t';
+	    }
+	}
+	if(findbook!='t')
+	{
+	    gotoxy(10,10);
+	    printf("No record is found modify the search");
+	    if(getch())
+	    mainmenu();
+	}
+	if(findbook=='t' )
+	{
+	    gotoxy(10,9);
+	    printf("Do you want to delete it?(Y/N):");
+	    if(getch()=='y')
+	    {
+		ft=fopen("test.dat","wb+");  //temporary file for delete
+		rewind(fp);
+		while(fread(&a,sizeof(a),1,fp)==1)
+		{
+		    if(a.id!=d)
+		    {
+			fseek(ft,0,SEEK_CUR);
+			fwrite(&a,sizeof(a),1,ft); //write all in tempory file except that
+		    }                              //we want to delete
+		}
+		fclose(ft);
+		fclose(fp);
+		remove("Bibek.dat");
+		rename("test.dat","Bibek.dat"); //copy all item from temporary file to fp except that
+		fp=fopen("Bibek.dat","rb+");    //we want to delete
+		if(findbook=='t')
+		{
+		    gotoxy(10,10);
+		    printf("The record is sucessfully deleted");
+		    gotoxy(10,11);
+		    printf("Delete another record?(Y/N)");
+		}
+	    }
+	else
+	mainmenu();
+	fflush(stdin);
+	another=getch();
+	}
+	}
+    gotoxy(10,15);
+    mainmenu();
+}
+void searchbooks()
+{
+    system("cls");
+    int d;
+    printf("*****************************Search Books*********************************");
+    gotoxy(20,10);
+    printf("\xDB\xDB\xDB\xB2 1. Search By ID");
+    gotoxy(20,14);
+    printf("\xDB\xDB\xDB\xB2 2. Search By Name");
+    gotoxy( 15,20);
+    printf("Enter Your Choice");
+    fp=fopen("Bibek.dat","rb+"); //open file for reading propose
+    rewind(fp);   //move pointer at the begining of file
+    switch(getch())
+    {
+	  case '1':
+	{
+	    system("cls");
+	    gotoxy(25,4);
+	    printf("****Search Books By Id****");
+	    gotoxy(20,5);
+	    printf("Enter the book id:");
+	    scanf("%d",&d);
+	    gotoxy(20,7);
+	    printf("Searching........");
+	    while(fread(&a,sizeof(a),1,fp)==1)
+	    {
+		if(a.id==d)
+		{
+		    delay(2);
+		    gotoxy(20,7);
+		    printf("The Book is available");
+		    gotoxy(20,8);
+		    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+		    gotoxy(20,9);
+		    printf("\xB2 ID:%d",a.id);gotoxy(47,9);printf("\xB2");
+		    gotoxy(20,10);
+		    printf("\xB2 Name:%s",a.name);gotoxy(47,10);printf("\xB2");
+		    gotoxy(20,11);
+		    printf("\xB2 Author:%s ",a.Author);gotoxy(47,11);printf("\xB2");
+		    gotoxy(20,12);
+		    printf("\xB2 Qantity:%d ",a.quantity);gotoxy(47,12);printf("\xB2"); gotoxy(47,11);printf("\xB2");
+		    gotoxy(20,13);
+		    printf("\xB2 Price:Rs.%.2f",a.Price);gotoxy(47,13);printf("\xB2");
+		    gotoxy(20,14);
+		    printf("\xB2 Rack No:%d ",a.rackno);gotoxy(47,14);printf("\xB2");
+		    gotoxy(20,15);
+		    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+		    findbook='t';
+		}
+
+	    }
+	    if(findbook!='t')  //checks whether conditiion enters inside loop or not
+	    {
+	    gotoxy(20,8);
+	    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+	    gotoxy(20,9);printf("\xB2");  gotoxy(38,9);printf("\xB2");
+	    gotoxy(20,10);
+	    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+	    gotoxy(22,9);printf("\aNo Record Found");
+	    }
+	    gotoxy(20,17);
+	    printf("Try another search?(Y/N)");
+	    if(getch()=='y')
+	    searchbooks();
+	    else
+	    mainmenu();
+	    break;
+	}
+	case '2':
+	{
+	    char s[15];
+	    system("cls");
+	    gotoxy(25,4);
+	    printf("****Search Books By Name****");
+	    gotoxy(20,5);
+	    printf("Enter Book Name:");
+	    scanf("%s",s);
+	    int d=0;
+	    while(fread(&a,sizeof(a),1,fp)==1)
+	    {
+		if(strcmp(a.name,(s))==0) //checks whether a.name is equal to s or not
+		{
+		    gotoxy(20,7);
+		    printf("The Book is available");
+		    gotoxy(20,8);
+		    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+		    gotoxy(20,9);
+		    printf("\xB2 ID:%d",a.id);gotoxy(47,9);printf("\xB2");
+		    gotoxy(20,10);
+		    printf("\xB2 Name:%s",a.name);gotoxy(47,10);printf("\xB2");
+		    gotoxy(20,11);
+		    printf("\xB2 Author:%s",a.Author);gotoxy(47,11);printf("\xB2");
+		    gotoxy(20,12);
+		    printf("\xB2 Qantity:%d",a.quantity);gotoxy(47,12);printf("\xB2");
+		    gotoxy(20,13);
+		    printf("\xB2 Price:Rs.%.2f",a.Price);gotoxy(47,13);printf("\xB2");
+		    gotoxy(20,14);
+		    printf("\xB2 Rack No:%d ",a.rackno);gotoxy(47,14);printf("\xB2");
+		    gotoxy(20,15);
+		    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+		    d++;
+		}
+
+	    }
+	    if(d==0)
+	    {
+	    gotoxy(20,8);
+	    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+	    gotoxy(20,9);printf("\xB2");  gotoxy(38,9);printf("\xB2");
+	    gotoxy(20,10);
+	    printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+	    gotoxy(22,9);printf("\aNo Record Found");
+	    }
+	    gotoxy(20,17);
+	    printf("Try another search?(Y/N)");
+	    if(getch()=='y')
+	    searchbooks();
+	    else
+	    mainmenu();
+	    break;
+	}
+	default :
+	getch();
+	searchbooks();
+    }
+    fclose(fp);
+}
+void issuebooks(void)  //function that issue books from library
+{
+    int t;
+
+    system("cls");
+    printf("********************************ISSUE SECTION**************************");
+    gotoxy(10,5);
+    printf("\xDB\xDB\xDB\xDb\xB2 1. Issue a Book");
+    gotoxy(10,7);
+    printf("\xDB\xDB\xDB\xDb\xB2 2. View Issued Book");
+    gotoxy(10,9);
+    printf("\xDB\xDB\xDB\xDb\xB2 3. Search Issued Book");
+    gotoxy(10,11);
+    printf("\xDB\xDB\xDB\xDb\xB2 4. Remove Issued Book");
+    gotoxy(10,14);
+    printf("Enter a Choice:");
+    switch(getch())
+    {
+	case '1':  //issue book
+	{
+		system("cls");
+		int c=0;
+		char another='y';
+		while(another=='y')
+		{
+			system("cls");
+			gotoxy(15,4);
+			printf("***Issue Book section***");
+			gotoxy(10,6);
+			printf("Enter the Book Id:");
+			scanf("%d",&t);
+			fp=fopen("Bibek.dat","rb");
+			fs=fopen("Issue.dat","ab+");
+			if(checkid(t)==0) //issues those which are present in library
+			{
+			     gotoxy(10,8);
+			     printf("The book record is available");
+			     gotoxy(10,9);
+			     printf("There are %d unissued books in library ",a.quantity);
+			     gotoxy(10,10);
+			     printf("The name of book is %s",a.name);
+			     gotoxy(10,11);
+			     printf("Enter student name:");
+			     scanf("%s",a.stname);
+			    // struct dosdate_t d; //for current date
+			    // _dos_getdate(&d);
+			    // a.issued.dd=d.day;
+			    // a.issued.mm=d.month;
+			     //a.issued.yy=d.year;
+			     gotoxy(10,12);
+			     printf("Issued date=%d-%d-%d",a.issued.dd,a.issued.mm,a.issued.yy);
+			     gotoxy(10,13);
+			     printf("The BOOK of ID %d is issued",a.id);
+			     a.duedate.dd=a.issued.dd+RETURNTIME;   //for return date
+			     a.duedate.mm=a.issued.mm;
+			     a.duedate.yy=a.issued.yy;
+			     if(a.duedate.dd>30)
+			     {
+				 a.duedate.mm+=a.duedate.dd/30;
+				 a.duedate.dd-=30;
+
+			     }
+			     if(a.duedate.mm>12)
+			     {
+				a.duedate.yy+=a.duedate.mm/12;
+				a.duedate.mm-=12;
+
+			     }
+			     gotoxy(10,14);
+			     printf("To be return:%d-%d-%d",a.duedate.dd,a.duedate.mm,a.duedate.yy);
+			     fseek(fs,sizeof(a),SEEK_END);
+			     fwrite(&a,sizeof(a),1,fs);
+			     fclose(fs);
+			     c=1;
+			}
+			if(c==0)
+			{
+			gotoxy(10,11);
+			printf("No record found");
+			}
+			gotoxy(10,15);
+			printf("Issue any more(Y/N):");
+			fflush(stdin);
+			another=getche();
+			fclose(fp);
+		}
+
+		break;
+	}
+	case '2':  //show issued book list
+	{
+		system("cls");
+		int j=4;
+		printf("*******************************Issued book list*******************************\n");
+		gotoxy(2,2);
+		printf("STUDENT NAME    CATEGORY    ID    BOOK NAME    ISSUED DATE    RETURN DATE");
+	       fs=fopen("Issue.dat","rb");
+		while(fread(&a,sizeof(a),1,fs)==1)
+		{
+
+			gotoxy(2,j);
+			printf("%s",a.stname);
+			gotoxy(18,j);
+			printf("%s",a.cat);
+			gotoxy(30,j);
+			printf("%d",a.id);
+			gotoxy(36,j);
+			printf("%s",a.name);
+			gotoxy(51,j);
+			printf("%d-%d-%d",a.issued.dd,a.issued.mm,a.issued.yy );
+			gotoxy(65,j);
+			printf("%d-%d-%d",a.duedate.dd,a.duedate.mm,a.duedate.yy);
+			//struct dosdate_t d;
+			//_dos_getdate(&d);
+			gotoxy(50,25);
+//			printf("Current date=%d-%d-%d",d.day,d.month,d.year);
+			j++;
+
+		}
+		fclose(fs);
+		gotoxy(1,25);
+		returnfunc();
+	}
+	break;
+	case '3':   //search issued books by id
+	{
+		system("cls");
+		gotoxy(10,6);
+		printf("Enter Book ID:");
+		int p,c=0;
+		char another='y';
+		while(another=='y')
+		{
+
+			scanf("%d",&p);
+			fs=fopen("Issue.dat","rb");
+			while(fread(&a,sizeof(a),1,fs)==1)
+			{
+				if(a.id==p)
+				{
+					issuerecord();
+					gotoxy(10,12);
+					printf("Press any key.......");
+					getch();
+					issuerecord();
+					c=1;
+				}
+
+			}
+			fflush(stdin);
+			fclose(fs);
+			if(c==0)
+			{
+				gotoxy(10,8);
+				printf("No Record Found");
+			}
+			gotoxy(10,13);
+			printf("Try Another Search?(Y/N)");
+			another=getch();
+		}
+	}
+	break;
+	case '4':  //remove issued books from list
+	{
+		system("cls");
+		int b;
+		FILE *fg;  //declaration of temporary file for delete
+		char another='y';
+		while(another=='y')
+		{
+			gotoxy(10,5);
+			printf("Enter book id to remove:");
+			scanf("%d",&b);
+			fs=fopen("Issue.dat","rb+");
+			while(fread(&a,sizeof(a),1,fs)==1)
+			{
+				if(a.id==b)
+				{
+					issuerecord();
+					findbook='t';
+				}
+				if(findbook=='t')
+				{
+					gotoxy(10,12);
+					printf("Do You Want to Remove it?(Y/N)");
+					if(getch()=='y')
+					{
+						fg=fopen("record.dat","wb+");
+						rewind(fs);
+						while(fread(&a,sizeof(a),1,fs)==1)
+						{
+							if(a.id!=b)
+							{
+							fseek(fs,0,SEEK_CUR);
+							fwrite(&a,sizeof(a),1,fg);
+							}
+						}
+						fclose(fs);
+						fclose(fg);
+						remove("Issue.dat");
+						rename("record.dat","Issue.dat");
+						gotoxy(10,14);
+						printf("The issued book is removed from list");
+
+				       }
+
+				}
+				if(findbook!='t')
+				{
+					gotoxy(10,15);
+					printf("No Record Found");
+				}
+			}
+			gotoxy(10,16);
+			printf("Delete any more?(Y/N)");
+			another=getch();
+		}
+	}
+	default:
+	gotoxy(10,18);
+	printf("\aWrong Entry!!");
+    getch();
+	issuebooks();
+	break;
+      }
+      gotoxy(1,30);
+      returnfunc();
+}
+void viewbooks(void)  //show the list of book persists in library
+{
+    int i=0,j;
+    system("cls");
+    gotoxy(1,1);
+    printf("*********************************Book List*****************************");
+    gotoxy(2,2);
+    printf(" CATEGORY     ID    BOOK NAME     AUTHOR       QTY     PRICE     RackNo ");
+    j=4;
+    fp=fopen("Bibek.dat","rb");
+    while(fread(&a,sizeof(a),1,fp)==1)
+    {
+	gotoxy(3,j);
+	printf("%s",a.cat);
+	gotoxy(16,j);
+	printf("%d",a.id);
+	gotoxy(22,j);
+	printf("%s",a.name);
+	gotoxy(36,j);
+	printf("%s",a.Author);
+	gotoxy(50,j);
+	printf("%d",a.quantity);
+	gotoxy(57,j);
+	printf("%.2f",a.Price);
+	gotoxy(69,j);
+	printf("%d",a.rackno);
+	printf("\n\n");
+	j++;
+	i=i+a.quantity;
+      }
+      gotoxy(3,25);
+      printf("Total Books =%d",i);
+      fclose(fp);
+      gotoxy(35,25);
+      returnfunc();
+}
+void editbooks(void)  //edit information about book
+{
+	system("cls");
+	int c=0;
+	int d,e;
+	gotoxy(20,4);
+	printf("****Edit Books Section****");
+	char another='y';
+	while(another=='y')
+	{
+		system("cls");
+		gotoxy(15,6);
+		printf("Enter Book Id to be edited:");
+		scanf("%d",&d);
+		fp=fopen("Bibek.dat","rb+");
+		while(fread(&a,sizeof(a),1,fp)==1)
+		{
+			if(checkid(d)==0)
+			{
+				gotoxy(15,7);
+				printf("The book is availble");
+				gotoxy(15,8);
+				printf("The Book ID:%d",a.id);
+				gotoxy(15,9);
+				printf("Enter new name:");scanf("%s",a.name);
+				gotoxy(15,10);
+				printf("Enter new Author:");scanf("%s",a.Author);
+				gotoxy(15,11);
+				printf("Enter new quantity:");scanf("%d",&a.quantity);
+				gotoxy(15,12);
+				printf("Enter new price:");scanf("%f",&a.Price);
+				gotoxy(15,13);
+				printf("Enter new rackno:");scanf("%d",&a.rackno);
+				gotoxy(15,14);
+				printf("The record is modified");
+				fseek(fp,ftell(fp)-sizeof(a),0);
+				fwrite(&a,sizeof(a),1,fp);
+				fclose(fp);
+				c=1;
+			}
+			if(c==0)
+			{
+				gotoxy(15,9);
+				printf("No record found");
+			}
+		}
+		gotoxy(15,16);
+		printf("Modify another Record?(Y/N)");
+		fflush(stdin);
+		another=getch() ;
+	}
+		returnfunc();
+}
+void returnfunc(void)
+{
+    {
+	printf(" Press ENTER to return to main menu");
+    }
+    a:
+    if(getch()==13) //allow only use of enter
+    mainmenu();
+    else
+    goto a;
+}
+int getdata()
+{
+	int t;
+	gotoxy(20,3);printf("Enter the Information Below");
+	gotoxy(20,4);printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+	gotoxy(20,5);
+	printf("\xB2");gotoxy(46,5);printf("\xB2");
+	gotoxy(20,6);
+	printf("\xB2");gotoxy(46,6);printf("\xB2");
+	gotoxy(20,7);
+	printf("\xB2");gotoxy(46,7);printf("\xB2");
+	gotoxy(20,8);
+	printf("\xB2");gotoxy(46,8);printf("\xB2");
+	gotoxy(20,9);
+	printf("\xB2");gotoxy(46,9);printf("\xB2");
+	gotoxy(20,10);
+	printf("\xB2");gotoxy(46,10);printf("\xB2");
+	gotoxy(20,11);
+	printf("\xB2");gotoxy(46,11);printf("\xB2");
+	gotoxy(20,12);
+	printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+	gotoxy(21,5);
+	printf("Category:");
+	gotoxy(31,5);
+	printf("%s",catagories[s-1]);
+	gotoxy(21,6);
+	printf("Book ID:\t");
+	gotoxy(30,6);
+	scanf("%d",&t);
+	if(checkid(t) == 0)
+	{
+		gotoxy(21,13);
+		printf("\aThe book id already exists\a");
+		getch();
+		mainmenu();
+		return 0;
+	}
+	a.id=t;
+	gotoxy(21,7);
+	printf("Book Name:");gotoxy(33,7);
+	scanf("%s",a.name);
+	gotoxy(21,8);
+	printf("Author:");gotoxy(30,8);
+	scanf("%s",a.Author);
+	gotoxy(21,9);
+	printf("Quantity:");gotoxy(31,9);
+	scanf("%d",&a.quantity);
+	gotoxy(21,10);
+	printf("Price:");gotoxy(28,10);
+	scanf("%f",&a.Price);
+	gotoxy(21,11);
+	printf("Rack No:");gotoxy(30,11);
+	scanf("%d",&a.rackno);
+	return 1;
+}
+int checkid(int t)  //check whether the book is exist in library or not
+{
+	rewind(fp);
+	while(fread(&a,sizeof(a),1,fp)==1)
+	if(a.id==t)
+	return 0;  //returns 0 if book exits
+      return 1; //return 1 if it not
+}
+int t(void) //for time
+{
+time_t t;
+time(&t);
+printf("Date and time:%s\n",ctime(&t));
+
+return 0 ;
+}
+//void show_mouse(void) //show inactive mouse pointer in programme
+//{
+//union REGS in,out;
+//
+//       in.x.ax = 0x1;
+//       int86(0x33,&in,&out);
+//}
+void Password(void) //for password option
+{
+
+   system("cls");
+   char d[25]="Password Protected";
+   char ch,pass[10];
+   int i=0,j;
+   //textbackground(WHITE);
+   //textcolor(RED);
+    gotoxy(10,4);
+    for(j=0;j<20;j++)
+    {
+    delay(50);
+    printf("*");
+    }
+    for(j=0;j<20;j++)
+   {
+   delay(50);
+   printf("%c",d[j]);
+   }
+   for(j=0;j<20;j++)
+   {
+   delay(50);
+   printf("*");
+   }
+   gotoxy(10,10);
+   gotoxy(15,7);
+   printf("Enter Password:");
+
+   while(ch!=13)
+   {
+	ch=getch();
+
+	if(ch!=13 && ch!=8){
+	putch('*');
+	pass[i] = ch;
+	i++;
+	}
+   }
+   pass[i] = '\0';
+   if(strcmp(pass,passwor)==0)
+   {
+
+	gotoxy(15,9);
+	//textcolor(BLINK);
+	printf("Password match");
+	gotoxy(17,10);
+	printf("Press any key to countinue.....");
+	getch();
+	mainmenu();
+   }
+   else
+   {
+	 gotoxy(15,16);
+	 printf("\aWarning!! Incorrect Password");
+	 getch();
+	 Password();
+   }
+}
+void issuerecord()  //display issued book's information
+{
+		 system("cls");
+		 gotoxy(10,8);
+		 printf("The Book has taken by Mr. %s",a.stname);
+		 gotoxy(10,9);
+		 printf("Issued Date:%d-%d-%d",a.issued.dd,a.issued.mm,a.issued.yy);
+		 gotoxy(10,10);
+		 printf("Returning Date:%d-%d-%d",a.duedate.dd,a.duedate.mm,a.duedate.yy);
+}
+void loaderanim()
+{
+int loader;
+system("cls");
+gotoxy(20,10);
+printf("LOADING........");
+printf("\n\n");
+gotoxy(22,11);
+for(loader=1;loader<20;loader++)
+{
+delay(100);printf("%c",219);}
+}
+//End of program
